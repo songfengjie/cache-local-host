@@ -5,6 +5,7 @@
 // extern是一个关键字，用于声明变量或者函数，声明过的可以在其他文件中使用
 extern "C"
 {
+    JNIEXPORT void JNICALL Java_com_ext_HostCache_containerMaxUseMemSize(JNIEnv *env, jobject thiz, jlong maxUsableBytes);
 
     JNIEXPORT void JNICALL Java_com_ext_HostCache_put(JNIEnv *env, jobject thiz, jstring cacheKey, jbyteArray data);
 
@@ -20,7 +21,8 @@ size_t cacheSizeMax;
 // 已经使用的内存大小
 std::atomic<long> usedCacheSize;
 
-JNIEXPORT void JNICALL Java_com_ext_HostCache_containerMaxUseMemSize(JNIEnv *env, jobject thiz, jlong maxUsableBytes) {
+JNIEXPORT void JNICALL Java_com_ext_HostCache_containerMaxUseMemSize(JNIEnv *env, jobject thiz, jlong maxUsableBytes)
+{
     // 设置缓存的最大空间
     cacheSizeMax = (size_t)maxUsableBytes;
 }
