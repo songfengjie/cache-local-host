@@ -1,7 +1,10 @@
 #ifndef MEMORY_SIZE_UTILS_H
 #define MEMORY_SIZE_UTILS_H
 
-#if defined(_WIN32)
+#if defined(_WIN64)
+    #include <malloc.h>
+    #define GET_MEMORY_SIZE(ptr) _msize((ptr))
+#elif defined(_WIN32)
     #include <malloc.h>
     #define GET_MEMORY_SIZE(ptr) _msize((ptr))
 #elif defined(__APPLE__)
